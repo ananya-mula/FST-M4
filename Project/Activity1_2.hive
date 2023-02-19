@@ -1,0 +1,27 @@
+-- Activity 1
+
+drop TABLE episodeV;
+drop TABLE episodeVI;
+drop TABLE episodeIV;
+
+-- For Episode IV
+CREATE TABLE episodeIV (name STRING, line STRING)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' TBLPROPERTIES ("skip.header.line.count"="2");
+LOAD DATA LOCAL INPATH '/root/episodeIV_dialouges.txt' INTO TABLE episodeIV;
+SELECT name, COUNT(name) AS no_of_lines from episodeIV GROUP BY name ORDER BY no_of_lines DESC;
+
+-- For Episode V
+CREATE TABLE episodeV (name STRING, line STRING)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' TBLPROPERTIES ("skip.header.line.count"="2");
+LOAD DATA LOCAL INPATH '/root/episodeV_dialouges.txt' INTO TABLE episodeV;
+SELECT name, COUNT(name) AS no_of_lines from episodeV GROUP BY name ORDER BY no_of_lines DESC;
+
+-- For Episode VI
+CREATE TABLE episodeVI (name STRING, line STRING)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' TBLPROPERTIES ("skip.header.line.count"="2");
+LOAD DATA LOCAL INPATH '/root/episodeVI_dialouges.txt' INTO TABLE episodeVI;
+SELECT name, COUNT(name) AS no_of_lines from episodeVI GROUP BY name ORDER BY no_of_lines DESC;
+
+-- Activity 2
+SELECT COUNT(*) from episodeIV WHERE INSTR(line, 'Luke')>0;
+
